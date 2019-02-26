@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "887815028443",
+    "firebase_url": "https://doostanios.firebaseio.com",
+    "project_id": "doostanios",
+    "storage_bucket": "doostanios.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:887815028443:android:da736e7a828a6705",
+        "android_client_info": {
+          "package_name": "com.doostanios"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "887815028443-4min7plk28sh7047i7igqpestls56q23.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDTY950E6bd9xrwByA6DWyRj8SGMVZcdLg"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
