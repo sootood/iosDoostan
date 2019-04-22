@@ -10,7 +10,9 @@ import * as Animatable from 'react-native-animatable';
 import { Provider } from 'react-redux';
 import { createStore, applyMiddleware } from 'redux';
 import ReduxThunk from 'redux-thunk';
+import firebase from 'react-native-firebase';
 import reducers from './reducer';
+import {FIREBASE} from './config'
 
 import {
   goToAuth,
@@ -29,9 +31,20 @@ export default class Initialising extends React.Component {
     try {
       const user = await AsyncStorage.getItem(USER_KEY)
       console.log('user: ', user)
-      if (!user) {
+      if (user) {
         goMainPage()
       } else {
+        const firebaseConfig = {
+          apiKey: 'AIzaSyAGrFeYyxpfqRrLOqZN8znHNE4NFaUplck',
+          authDomain: 'blah',
+          databaseURL: 'https://doostanios.firebaseio.com',
+          storageBucket: 'blah',
+          messagingSenderId: '887815028443'
+        };
+        
+        firebase.initializeApp(firebaseConfig);
+        const fcmToken = await firebase.messaging().getToken(); 
+        await AsyncStorage.setItem(FIREBASE, fcmToken)
         goSignUp()
       }
     } catch (err) {

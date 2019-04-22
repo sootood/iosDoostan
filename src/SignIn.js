@@ -9,21 +9,28 @@ import {
 } from 'react-native'
 
 import { goHome } from './navigation'
-import { USER_KEY } from './config'
+import { USER_KEY , FIREBASE} from './config'
 
 export default class SignIn extends React.Component {
   state = {
     username: '', password: ''
   }
+  async userToken(){
+    const fcmToken = await firebase.messaging().getToken(); 
+    }
   onChangeText = (key, value) => {
     this.setState({ [key]: value })
   }
   signIn = async () => {
+
     const { username, password } = this.state
+    
     try {
        // login with provider
        const user = await AsyncStorage.setItem(USER_KEY, username)
+        await AsyncStorage.setItem(FIREBASE, fcmToken)
        console.log('user successfully signed in!', user)
+       console.log('token!', fcmToken)
        goHome()
     } catch (err) {
       console.log('error:', err)

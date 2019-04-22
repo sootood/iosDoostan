@@ -3,6 +3,8 @@ package com.doostanios;
 import android.app.Application;
 
 import com.facebook.react.ReactApplication;
+import com.horcrux.svg.SvgPackage;
+import com.oblador.vectoricons.VectorIconsPackage;
 import io.invertase.firebase.RNFirebasePackage;
 import io.invertase.firebase.firestore.RNFirebaseFirestorePackage;
 import io.invertase.firebase.messaging.RNFirebaseMessagingPackage;
@@ -77,7 +79,11 @@ import com.reactnativenavigation.react.ReactGateway;
          return Arrays.<ReactPackage>asList(
              // eg. new VectorIconsPackage()
              new RNFirebasePackage(),
-             new RNFirebaseMessagingPackage()
+             new RNFirebaseMessagingPackage(),
+             new VectorIconsPackage(),
+             new SvgPackage()
+
+
          );
      }
    

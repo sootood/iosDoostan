@@ -4,11 +4,19 @@ import {
   Button,
   TextInput,
   StyleSheet,
-  Image
+  Image,
+  AsyncStorage
 } from 'react-native'
 import { connect } from 'react-redux';
-import  phoneNumberChange  from './actions';
+import  {phoneNumberChange,createAgant,verifyCode}  from './actions';
+import {FIREBASE,USER_KEY} from './config';
+import {
+  goMainPage
+} from './navigation'
+import firebase from 'react-native-firebase';
 
+
+let token=null;
  class SignUp extends React.Component {
   static get options() {
     return {
@@ -22,20 +30,47 @@ import  phoneNumberChange  from './actions';
   state = {
     username: '', password: '', email: '', phone_number: ''
   }
-  onChangeText = (key, val) => {
-    console.log(text);
-    this.props.phoneNumberChange(val);
-  }
-  signUp = async () => {
-    const {  phone_number } = this.state
+  
+  async componentDidMount(){
     try {
-      // here place your signup logic
-
-      console.log('user successfully signed up!: ', success)
+       token = await AsyncStorage.getItem(FIREBASE)
+      console.log('token: ', token)
+      if (token) {
+      } else {
+      }
     } catch (err) {
-      console.log('error signing up: ', err)
+      console.log('error: ', err)
+    }
+
+    if (this.props.succedSignUp) {
+      console.log('succed login');
+      await AsyncStorage.setItem(USER_KEY, 'userishere')
     }
   }
+  onChangeText = (key, val) => {
+    console.log(val);
+    this.props.phoneNumberChange(val);
+  }
+
+  onVerifyCodeTextChange = (val) => {
+    console.log(val);
+    this.props.verifyCode(val);
+  }
+  signUp() {
+  
+    if(this.props.succedSignUp && this.props.inputVC!== '')
+    {   
+      if (this.props.inputVC === this.props.verifyCodeText) {
+        goMainPage()
+      }else{
+        console.log('invalid code');
+        
+      }
+    }
+    else
+  { this.props.createAgant('','','',this.props.phoneNumber,'','','','','',0,'','',token)}
+  }
+
  
   render() {
     return (
@@ -68,16 +103,24 @@ import  phoneNumberChange  from './actions';
           onChangeText={val => this.onChangeText('email', val)}
         />*/}
         <TextInput
-          style={styles.input}
+          style={[styles.input,{opacity: this.props.verifyCodeText==='' ? 1 : 0}]}
           placeholder='Phone Number'
           autoCapitalize="none"
           textContentType="telephoneNumber"
           placeholderTextColor='white'
           onChangeText={val => this.onChangeText('phone_number', val)}
         /> 
+        <TextInput
+          style={[styles.input,{opacity: this.props.verifyCodeText==='' ? 0 : 1}]}
+          placeholder='کد تاییدیه '
+          autoCapitalize="none"
+          textContentType="telephoneNumber"
+          placeholderTextColor='white'
+          onChangeText={val => this.onVerifyCodeTextChange(val)}
+        />
         <Button
           title='ارسال'
-          onPress={this.signUp}
+          onPress={this.signUp.bind(this)}
         />
       </View>
     )
@@ -85,8 +128,12 @@ import  phoneNumberChange  from './actions';
 }
 const mapStatetoProps = state => ({
   phoneNumber: state.auth.phoneNumber,
+  succedSignUp: state.auth.succed,
+  verifyCodeText: state.auth.verifyCode,
+  inputVC: state.auth.inputVerfyCode
+
 });
-export default connect(mapStatetoProps, { phoneNumberChange })(SignUp);
+export default connect(mapStatetoProps, { phoneNumberChange ,createAgant,verifyCode})(SignUp);
 
 const styles = StyleSheet.create({
   input: {

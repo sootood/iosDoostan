@@ -3,6 +3,7 @@ import {
   View,
   Text,
   Button,
+  Image,
   StyleSheet,
 } from 'react-native'
 import {Navigation} from 'react-native-navigation';
@@ -20,11 +21,15 @@ export default class Screen2 extends React.Component {
   render() {
     return (
       <View style={styles.container}>
-        <Text>Screen 2</Text>
-        <Button
-          onPress={() => Navigation.pop(this.props.componentId)}
-          title="Go Back"
-        />
+       <View style={{height: '35%', backgroundColor: 'blue', alignItems: 'center'}}>
+        <Image style={{width:200 , height:200}}
+        source={require('./image/circlelogo.png')}></Image>
+       </View>
+       <View style={{flexDirection:'row', alignItems: 'center', padding:10, direction:'rtl'}}>
+         <Image style={{width:20 , height:20}}
+        source={require('./image/circlelogo.png')}></Image>
+        <Text style={{padding:5}}>kfjfkg</Text>
+        </View>
       </View>
     )
   }
@@ -33,7 +38,7 @@ export default class Screen2 extends React.Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center'
+    
+    backgroundColor:'white'
   }
 })

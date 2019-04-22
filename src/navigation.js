@@ -41,6 +41,13 @@ export const goMainPage = () =>
 
 Navigation.setRoot({
     root: {
+      sideMenu: {
+        right: {
+          component: {
+          name: 'Screen2',
+          }
+        },
+        center:{
         bottomTabs: {
             children: [{
                     stack: {
@@ -58,13 +65,21 @@ Navigation.setRoot({
                             title: {
                               text: 'Home'
                             },
+                            background:{
+                              color:'blue'
+                            },
+                            leftButtons: [{
+                              id: 'buttonOne',
+                              icon: require('./image/in.png'),
+                            }, ],
                           },
                             bottomTab: {
                                 text: 'Home',
                                 fontSize: 12,
                                 icon: require('./image/in.png'),
 
-                            }
+                            },
+                            
                         }
                     }
                 },
@@ -90,8 +105,11 @@ Navigation.setRoot({
                 }
             ]
         }
+      }
+    }
+  }
 }
-});
+);
 
 
 export const goHome = () => Navigation.setRoot({

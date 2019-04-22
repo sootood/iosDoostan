@@ -3,12 +3,12 @@ import { View , Text,TouchableHighlight,Image,StyleSheet} from 'react-native';
 import {Card, ExpamdedList,Input} from './component';
 
 const arrayCarType=[];
-class Search extends React.Component{
+class CreateAgancy extends React.Component{
     static get options() {
         return {
           topBar: {
             title: {
-              text: 'Search'
+              text: 'Agancy'
             },
           }
 
@@ -22,27 +22,23 @@ class Search extends React.Component{
     }
     searchByCode(){
         console.log('search');
-        
     }
 render(){
     return( 
     <View style={{flex:1 , paddingTop:40}}>
         <Card title='search'>
-            <Text>جستجوی پیشرفته</Text>
             <ExpamdedList 
-            title={'نوع ماشین را انتخاب کنید'}
-            defaultValue={'نوع ماشین'}
+            defaultValue={'نام  '}
+            options={this.state.arrayCarType}
+            onSelect={(idx, value) => console.log(idx)}
+            ></ExpamdedList>
+
+            <ExpamdedList 
+            defaultValue={'نام خانوادگی'}
             options={this.state.arrayCarType}
             ></ExpamdedList>
 
             <ExpamdedList 
-            title={'نوع  کالا را انتخاب کنید'}
-            defaultValue={'نوع کالا'}
-            options={this.state.arrayCarType}
-            ></ExpamdedList>
-
-            <ExpamdedList 
-            title={'سال خودرو را انتخاب کنید'}
             defaultValue={'سال خودرو'}
             options={this.state.arrayCarType}
             ></ExpamdedList>
@@ -53,23 +49,17 @@ render(){
             <TouchableHighlight>
                 <View style={{flexDirection:'row'}}>
                 <Text style={styles.textStyle}>
-                    جستجو
+                    ارسال
                 </Text>
-                <Image src={require('./image/loupe.png')}/>
                 </View>
             </TouchableHighlight>
-        </View>
-
-        <View>
-            <Input titleSearch={'جستجو با کلمه'} onPress={this.searchByWord()} placeholder={'کلمه موزد نظر'} />
-            <Input titleSearch={'جستجو با کد'} onPress={this.searchByCode()} placeholder={'کد موزد نظر'} />
         </View>
     </View>
         );
 }
 }
 
-export default Search;
+export default CreateAgancy;
 
 const styles=StyleSheet.create({
   

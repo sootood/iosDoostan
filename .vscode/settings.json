@@ -4,9 +4,13 @@
     //     "editor.formatOnSave": true,
     //     "editor.formatOnPaste": true
     // },
-    "editor.formatOnSave": false,
+    "prettier.singleQuote": true,
+    // Controls if the editor should automatically format the line after typing
+
+
     "[javascriptreact]": {
         "editor.formatOnSave": true
     },
-    
+
+
 }
